@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tosact Online Cafe</title>
+    <link rel="stylesheet" href="{% static 'cafe/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'cafe/home.css' %}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar__header">
+            <img src="{% static 'cafe/img/logo.jpg' %}" alt="Logo" class="navbar__logo">
+            <div class="navbar__btn">
+                <div class="btn bar1"></div>
+                <div class="btn bar2"></div>
+                <div class="btn bar3"></div>
+            </div>
+        </div>
+        <ul class="navbar__links">
+            <!-- FOR THE SINGLE LINK -->
+            <li>
+                <a class="navbar__single-link" href="">home</a>
+            </li>
+            <!-- FOR THE SINGLE LINK -->
+            <li>
+                <a class="navbar__single-link" href="">contact</a>
+            </li>
+            <!-- FOR THE SINGLE LINK -->
+            <li>
+                <a class="navbar__single-link" href="">blog</a>
+            </li>
+            <!-- FOR THE SINGLE LINK -->
+            <li>
+                <a class="navbar__single-link" href="">about</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    {% block content %}
+    {% endblock content %}
+
+
+    <script src="{% static 'cafe/navbar.js' %}"></script>
+</body>
+
+</html>
