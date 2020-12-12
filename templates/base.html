@@ -9,13 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>{% block title %} TOSACT HOME {% endblock title %}</title>
-
-    <!-- <link rel="stylesheet" href="{% static 'offline/css/bootstrap.min.css' %}"> -->
-    <!-- <link rel="stylesheet" href="{% static 'offline/font-awesome/all.min.css' %}"> IT'S CAUSING BUG-->
-
-    <!-- Font Awesome icons (free version)-->
-    <!-- <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script> -->
+    <title>{% block title %} TOSACT Home {% endblock title %}</title>
 
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
@@ -30,10 +24,13 @@
 </head>
 
 <body>
+    
     {% include 'navbar.html' %}
     
+
     {% block content %}
     {% endblock content %}
+    
 
     {% include 'scripts.html' %}
 
