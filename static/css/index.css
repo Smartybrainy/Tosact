@@ -3,3 +3,16 @@
   height: 45px;
   border-radius: 45px;
 }
+
+/* Blog detail */
+.red-like-text {
+  color: white;
+  background-color: red;
+}
+.blue-like-text {
+  color: white;
+  background-color: blue;
+}
+.smarty-image-height {
+  max-height: 45vh;
+}

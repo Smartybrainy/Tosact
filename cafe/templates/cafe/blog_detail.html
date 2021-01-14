@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>{% block title %} | Blog page {% endblock title %}</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-success fixed-top" id="mainNav">z
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/"><img src="{% static 'logo/tosact-logo.jpg' %}"
+                    alt="logo-img" id="logo-img" />
+            </a>
+            <!-- for messages -->
+            {% include "message.html" %}
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ml-1"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger hide" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger hide" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger hide" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger hide" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger hide" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{% url 'cafe:blog-list-view' %}">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- /navbar -->
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            
+            <!-- Blog Entries Column -->
+            <div class="col-md-8">
+
+                <!-- Blog Post -->
+                <br><br><br><br>
+                <div class="card mb-4">
+                    {% if object.image %}
+                    <img class="card-img-top smarty-image-height" src="{{ object.image.url }}" alt="post img">
+                    {% endif %}
+                    <div class="card-body">
+                        <h2 class="card-title">{{ object.title }}</h2>
+                        <p class="card-text">{{ object.content }}</p>
+
+                        <!-- For like button -->
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'cafe:blog-likes' pk=object.pk %}" method="POST" class="like-form" id="{{ object.id }}">
+                            {% csrf_token %}
+                            <input type="hidden" name="blog_id" value="{{ object.pk }}">
+                        
+                            {% if user not in object.liked.all %}
+                            <button type="submit" class="badge blue-like-text" title="like" id="like-btn{{ object.id }}">
+                                Like
+                            </button>
+                            <span class="text-info" id="like-count{{ object.id }}">{{ object.likes_count }}</span>&nbsp;
+                            <span class="text-info">likes</span>
+                            {% else %}
+                            <button type="submit" class="badge red-like-text" title="unlike" id="like-btn{{ object.id }}">
+                                Unlike</button>
+                            <span class="text-info" id="like-count{{ object.id }}">&nbsp;{{ object.likes_count }}</span>&nbsp;
+                            <span class="text-info">likes</span>
+                            {% endif %}
+                        </form>
+                        {% else %}
+                        <a href="{% url 'account_login' %}" class="badge blue-like-text" title="login first!">Like</a>
+                        <span class="text-info" id="like-count{{ object.id }}">&nbsp;{{ object.likes_count }}</span>&nbsp;
+                        <span class="text-info">likes</span>
+                        {% endif %}
+                        <!-- /likes -->
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted on {{ object.date_created }}, by {{ object.user.username }}
+                    </div>
+                </div>
+                <a class="btn btn-outline-info btn-sm" href="{% url 'cafe:blog-list-view' %}">&laquo; back</a>
+            </div>
+           
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+</body>
+
+<script>
+    window.onload = function () {
+        hideBookMarkFunc()
+    }
+    function hideBookMarkFunc() {
+        var services = document.getElementsByClassName('hide');
+        for (let i = 0; i < services.length; i++) {
+            services[i].style.display = "none"
+        }
+    }
+</script>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script src="{% static 'public_script/blog_likes_ajax.js' %}"></script>
+{% endblock extra_scripts %}

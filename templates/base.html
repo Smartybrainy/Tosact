@@ -23,18 +23,18 @@
     <link rel="icon" type="image/x-icon" href="{% static 'fav/favicon.ico' %}">
 </head>
 
-<body>
-    
-    {% include 'navbar.html' %}
-    
+<body style="background-color: lightgray;">
 
     {% block content %}
     {% endblock content %}
     
+    {% include 'footer.html' %}
 
     {% include 'scripts.html' %}
 
-    {% include 'footer.html' %}
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
+    
 </body>
 
 </html>

@@ -11,6 +11,8 @@ urlpatterns = [
     path('', include('cafe.urls', namespace="cafe")),
     path('favicon.ico',
          RedirectView.as_view(url=staticfiles_storage.url('fav/favicon.ico'))),
+    #
+    path('accounts/', include('allauth.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

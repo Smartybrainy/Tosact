@@ -11,6 +11,11 @@
             <div class="col-lg-4 text-lg-right">
                 <a class="mr-3" href="#!">Privacy Policy</a>
                 <a href="#!">Terms of Use</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="badge blue-like-text" title="login first!">Logout</a>
+                {% else %}
+                <a href="{% url 'account_login' %}" class="badge blue-like-text" title="login first!">Login</a>
+                {% endif %}
             </div>
         </div>
     </div>
